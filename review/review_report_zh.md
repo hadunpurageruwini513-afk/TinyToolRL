@@ -87,3 +87,25 @@
 ---
 
 *本报告所有数字均可由仓库内 `eval_results/*_records.jsonl` 与 `*_summary.json` 复算；审计脚本逻辑见正文引用的文件与行号。*
+
+---
+
+## 附录 A：修改回应（Revision Response，2026-10-07 起）
+
+针对第 3、4 节问题的逐条处理状态（✔ 已修 / ◐ 进行中 / ✖ 有意保留并说明）：
+
+| # | 审稿意见 | 状态 | 处理 |
+|---|---|:---:|---|
+| P0-1 | Abstract/README 把共享收益归功于 Ours | ✔ | report Abstract、README 主表下 honesty note、§5.2 新增 takeaway 4（零结果显式报告） |
+| P0-2 | "checkpoints released openly" 为假；MIT 无 LICENSE | ✔ | 声明改为"代码/数据/逐样本记录/复现脚本开源，adapter 可由脚本复现"；补 `LICENSE` |
+| P0-3 | CLAUDE.md 待办 I 误记 [x]；base/SFT 数字自相矛盾 | ✔ | 待办 I 改回 [ ] 并注明真实状态；C②/D④ 数字统一为入库 JSON 口径 |
+| P1-4 | λ 分化实验缺失（§6.1 推测无证据） | ◐ | `scripts/run_lambda_sweep.sh`：Fixed/Cap × λ∈{0.3,0.5} 四组同超参重训（带内存守卫串行）；结果入 §6.3 与 Fig4，分化与否均如实报告 |
+| P1-5 | needs_tool 与 c(x) 共线导致 Fixed≡Cap 结构性无功效 | ✖ 保留 | 重造数据+重训 SFT 全链路超出本次修订算力预算；已写入 report §7 Limitations 与 future work，并给出具体补救设计（标签-能力分歧样本、中间难度桶 ≥25%） |
+| P1-6 | 无 CI/显著性/种子 | ◐ | `scripts/analyze_stats.py` → `eval_results/stats_appendix.md`（Wilson CI + McNemar 精确检验）；report §5 新增不确定性段；多种子列入后续 |
+| P1-7 | 无训练曲线留档 | ✔ | `train_grpo.py` 训练后写 `logs/grpo_{mode}_lam{λ}_{tag}_log.json`（per-step 各 reward 均值/组统计），λ 扫描起生效 |
+| P2-8 | Fig2 自我反驳、Fig3 标注重叠 | ✔ | Fig2 改诚实标题"controlled null result"+ Wilson 误差线；Fig3 合并重合点、标签移出 CI 须区；新增 Fig4 λ 扫描图 |
+| P2-9 | requirements 未 pin CUDA 源 | ✔ | 精确 pin + cu128 index 说明 + HF 镜像提示 |
+| P2-10 | git 卫生（占位作者、单 commit、Deliverable 副本） | ◐ | 本地副本/临时目录/重复 zip 已删；git 身份改为 GitHub noreply；修订以独立 commit 提交。已推送的单 commit 历史不做 rewrite（避免破坏公开仓库引用），以本附录+CHANGELOG 式 commit 信息补足脉络 |
+| — | K=1vs3 消融、counterfactual cue 测试 | ✖ 保留 | 未做；report Limitations 明列 |
+
+**回应总原则**：凡实验未做的，一律改记为未做；凡数字有出入的，一律以入库逐样本记录为准；凡主张超出证据的，一律降级为 hypothesis 或 null result。λ 扫描完成后本附录与 report §6.3 同步更新实测结论。
