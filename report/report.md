@@ -161,6 +161,9 @@ By executing our complete experimental matrix on a consumer-grade laptop GPU (RT
 
 1. **Tool Diversity**: The present study focuses on arithmetic calculation via AST-based execution. Extending capability estimation to multi-turn search engines (e.g., Search-R1) and code execution environments is a promising next step.
 2. **Dynamic / Test-Time Capability Estimation**: In this work, $c(x)$ is pre-computed using the frozen policy $\pi_0$. Future work may explore parametric value heads or internal confidence probes (When2Tool, 2026) to estimate $c(x)$ dynamically on unlabelled queries at inference time.
+3. **Statistical Power**: Single seed per configuration and n=120–150 per split; accuracy deltas below ≈3pp are not statistically significant (Wilson CIs and McNemar tests in `eval_results/stats_appendix.md`). Multi-seed replication is required before any accuracy claim is treated as established.
+4. **Label–Capability Collinearity**: In the current synthetic splits, the `needs_tool` design label is nearly collinear with $c(x)$ (only ≈9.5% of training items fall in intermediate capability buckets), so $R_{\text{fixed}}$ and $R_{\text{cap}}$ coincide on ≈90% of items at small λ. Future data generation must deliberately include label–capability *disagreement* items (intermediate-difficulty arithmetic where the label and the model's own competence diverge) to give the two penalties statistical power to separate.
+5. **Scale & Offline c(x)**: All findings come from a single 0.6B model, and $c(x)$ is estimated offline against $\pi_0$ rather than tracked during training; generalization to larger models or online capability estimation is untested.
 
 ---
 
