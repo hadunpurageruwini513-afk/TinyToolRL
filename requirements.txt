@@ -1,0 +1,12 @@
+# Pinned requirements for TinyToolRL
+torch>=2.1.0
+transformers>=5.18.0
+trl>=1.14.0
+peft>=0.21.0
+datasets>=3.0.0
+accelerate>=1.0.0
+numpy>=1.26.0
+matplotlib>=3.8.0
+pyyaml>=6.0
+requests>=2.31.0
+tqdm>=4.66.0

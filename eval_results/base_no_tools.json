@@ -1,0 +1,26 @@
+{
+  "total": 150,
+  "accuracy": 0.0,
+  "tool_call_rate": 0.0,
+  "format_rate": 0.12,
+  "by_category": {
+    "common_sense": {
+      "count": 50,
+      "accuracy": 0.0,
+      "tool_call_rate": 0.0,
+      "format_rate": 0.26
+    },
+    "easy_arith": {
+      "count": 50,
+      "accuracy": 0.0,
+      "tool_call_rate": 0.0,
+      "format_rate": 0.0
+    },
+    "hard_arith": {
+      "count": 50,
+      "accuracy": 0.0,
+      "tool_call_rate": 0.0,
+      "format_rate": 0.1
+    }
+  }
+}

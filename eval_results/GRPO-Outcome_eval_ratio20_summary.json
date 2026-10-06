@@ -1,0 +1,66 @@
+{
+  "total": 120,
+  "accuracy": 0.95,
+  "tool_call_rate": 0.2,
+  "format_rate": 1.0,
+  "by_category": {
+    "common_sense": {
+      "count": 36,
+      "accuracy": 0.8333333333333334,
+      "tool_call_rate": 0.0,
+      "format_rate": 1.0
+    },
+    "easy_arith": {
+      "count": 60,
+      "accuracy": 1.0,
+      "tool_call_rate": 0.0,
+      "format_rate": 1.0
+    },
+    "hard_arith": {
+      "count": 24,
+      "accuracy": 1.0,
+      "tool_call_rate": 1.0,
+      "format_rate": 1.0
+    }
+  },
+  "by_capability": {
+    "0.0": {
+      "count": 15,
+      "accuracy": 0.6666666666666666,
+      "tool_call_rate": 0.6666666666666666,
+      "format_rate": 1.0
+    },
+    "0.333": {
+      "count": 8,
+      "accuracy": 0.875,
+      "tool_call_rate": 0.5,
+      "format_rate": 1.0
+    },
+    "0.667": {
+      "count": 7,
+      "accuracy": 1.0,
+      "tool_call_rate": 0.5714285714285714,
+      "format_rate": 1.0
+    },
+    "1.0": {
+      "count": 90,
+      "accuracy": 1.0,
+      "tool_call_rate": 0.06666666666666667,
+      "format_rate": 1.0
+    }
+  },
+  "capability_groups": {
+    "Incapable (c<=1/3)": {
+      "count": 23,
+      "accuracy": 0.7391304347826086,
+      "tool_call_rate": 0.6086956521739131,
+      "format_rate": 1.0
+    },
+    "Capable (c>=2/3)": {
+      "count": 97,
+      "accuracy": 1.0,
+      "tool_call_rate": 0.10309278350515463,
+      "format_rate": 1.0
+    }
+  }
+}
