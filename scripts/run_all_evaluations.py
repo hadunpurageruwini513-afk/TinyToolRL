@@ -29,6 +29,10 @@ MODELS = {
     "GRPO-Outcome": "checkpoints/grpo_outcome_run1",
     "GRPO-Fixed": "checkpoints/grpo_fixed_run1",
     "GRPO-Cap": "checkpoints/grpo_cap_run1",
+    "GRPO-Fixed-lam03": "checkpoints/grpo_fixed_lam03",
+    "GRPO-Cap-lam03": "checkpoints/grpo_cap_lam03",
+    "GRPO-Fixed-lam05": "checkpoints/grpo_fixed_lam05",
+    "GRPO-Cap-lam05": "checkpoints/grpo_cap_lam05",
 }
 
 

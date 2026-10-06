@@ -1,12 +1,16 @@
-# Pinned requirements for TinyToolRL
-torch>=2.1.0
-transformers>=5.18.0
-trl>=1.14.0
-peft>=0.21.0
-datasets>=3.0.0
-accelerate>=1.0.0
-numpy>=1.26.0
-matplotlib>=3.8.0
-pyyaml>=6.0
-requests>=2.31.0
-tqdm>=4.66.0
+# Exact pins for TinyToolRL (verified working combo, Python 3.12, CUDA 12.7 driver)
+# NOTE: torch cu128 wheel must come from the PyTorch index:
+#   pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu128
+# then: pip install -r requirements.txt
+# In mainland China set:  HF_ENDPOINT=https://hf-mirror.com  (model downloads)
+torch==2.11.0
+transformers==5.18.0
+trl==1.14.1
+peft==0.21.2
+datasets==5.1.0
+accelerate==1.15.0
+numpy==2.5.3
+matplotlib==3.11.2
+pyyaml==6.0.3
+requests==2.34.2
+tqdm==4.70.1

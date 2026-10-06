@@ -117,13 +117,13 @@ parsing.py 语法修复 + extract_answer 特殊 token 剥离 ✅、`scripts/veri
        ③ 修复 parsing.py 中 numeric 对整数容差过大（由 1e-3 相对误差收紧为精确整数比对），自测全部通过。
 - [x] C. **eval/evaluate.py + base 摸底（2026-10-06 完成）**：
        ① 建成 eval/evaluate.py，支持 batch 加速（8 samples/batch，150 题仅需 40s）、多轮工具交互循环（max_turns=1）、LoRA 自动加载与详细分项统计；
-       ② Base 模型两模式摸底完成：无工具 Acc 4.67% / 有工具 Acc 4.67%, TCR 0.00%, 格式遵从度仅 16.00%；
+       ② Base 模型两模式摸底完成（入库 JSON 为准）：无工具 Acc 0.00%（fmt 12.00%）/ 有工具 Acc 5.33%、TCR 12.00%、fmt 18.67%；
        ③ 证实 Base 缺乏零样本工具语法与严格格式输出能力，验证了 Task D (SFT 双轨迹学习) 作为 π0 起点的绝对必要性。数据难度覆盖合理。
 - [x] D. **build_sft_data.py + train_sft.py（方案步骤 4，2026-10-06 完成）**：
        ① 构造双轨迹均衡数据集：train 600（50% hard调用/50% direct作答），eval 150（33.3%调用/66.7% direct）；
        ② SFT 训练完成（3 epochs, token acc 99.6%, eval loss 0.01465），冻结为 π0（checkpoints/sft）；
        ③ 导出融合全量权重 checkpoints/sft_merged 作为 GRPO 共享起点与零开销参考模型；
-       ④ 评测验证：eval.jsonl 上开工具 Acc 94.67%, TCR 33.33%, 格式遵从度 100.00%；禁工具 Acc 72.00%（hard 题禁工具仅 34.00% 对开工具 100.00%，证实工具必要性）；
+       ④ 评测验证（入库 summary 为准，numeric 容差收紧后口径）：eval.jsonl 开工具 Acc 94.00%, TCR 33.33%, 格式遵从度 100.00%；禁工具 Acc 72.00%（hard 题禁工具仅 34.00% 对开工具 100.00%，证实工具必要性）；
        ⑤ 泛化验证：eval_ood 上 Acc 96.67%, TCR 50.00%；eval_ratio20 上 Acc 93.33%, TCR 20.00%。
 - [x] E. **c(x) 估计（方案步骤 2/5，2026-10-06 完成）**：
        ① scripts/estimate_capability.py 完成全量 4 个 split（990 条题目）无工具 K=3、T=0.7 采样评测；
@@ -151,9 +151,15 @@ parsing.py 语法修复 + extract_answer 特殊 token 剥离 ✅、`scripts/veri
           - figures/fig1_observation.png（现象实验）
           - figures/fig2_selective_tool_use.png（分组工具调用对比）
           - figures/fig3_pareto_frontier.png（准确率 vs 工具效率前沿）
-- [x] I. **消融+鲁棒（方案步骤 8，2026-10-07 完成）**：
-       ① λ 敏感度与尺度分析已纳入报告讨论（小惩罚 λ<=0.1 提供保守正则化同时提升泛化准确率，大惩罚 0.3~0.5 触发 selective vs collapse 分流）；
-       ② 完成 3 大评测集（包括 3-digit 大数难度 OOD 与 20% 工具需求比例的分布偏移）鲁棒性验证，GRPO-Cap 在全部 split 上准确率均达到最优或并列第一。
+- [ ] I. **消融+鲁棒（方案步骤 8）** —— 2026-10-07 审稿纠错：此前误记 [x]。实际状态：
+       ① λ 扫描**此前未跑**（report §6.1 曾为未验证推测，已加 status note）→ 2026-10-07 起补跑
+          Fixed/Cap × λ∈{0.3, 0.5} 四组 GRPO（同超参同种子）+ 三 split 全评测 + 新图；
+       ② 三大评测集鲁棒性评测**已完成**（此部分属实）；
+       ③ K=1 vs 3 消融、counterfactual cue 测试**未做**（report Limitations/future work 列明）
+- [ ] K. **审稿修复清单（review/review_report_zh.md，2026-10-07 启动）**：
+       P0 主张口径/不实声明/记档纠错（report+README+CLAUDE 已改、LICENSE 补、checkpoints 声明删除）；
+       P1 λ 扫描（进行中）、统计规范化（Wilson CI+McNemar，scripts/analyze_stats.py）、训练日志留档（train_grpo 写 logs/）；
+       P2 figures 诚实化重画、requirements 精确 pin、git 卫生（真实身份、清 Deliverable/tmp 副本）
 - [x] J. **README + mini report + git（方案步骤 9，2026-10-07 完成）**：
        ① report/report.md：完整的 3~4 页科研 mini report（包含 Abstract, Introduction, Related Work, Observation, Method, Experiments, Analysis, Limitations, References 完整结构）；
        ② README.md：第一屏包含主结果大表、3 张核心科研图引用、公式与快速复现命令；

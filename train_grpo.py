@@ -12,6 +12,7 @@ Usage:
 """
 
 import argparse
+import json
 import os
 import sys
 
@@ -248,6 +249,15 @@ def main():
 
     print("\nStarting GRPO training...")
     trainer.train()
+
+    # Persist per-step training metrics (per-reward means, completion stats, KL)
+    # so reviewers can verify the penalty term was active and inspect group
+    # reward variance (advantage degeneracy check). See review P1-7.
+    os.makedirs("logs", exist_ok=True)
+    log_path = os.path.join("logs", f"grpo_{mode}_lam{args.lam:g}_{args.tag}_log.json")
+    with open(log_path, "w", encoding="utf-8") as f:
+        json.dump(trainer.state.log_history, f, indent=2, ensure_ascii=False)
+    print(f"Saved training log history ({len(trainer.state.log_history)} entries) to {log_path}")
 
     print(f"\nSaving trained GRPO adapter to {args.output_dir}...")
     trainer.save_model(args.output_dir)

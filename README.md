@@ -30,6 +30,12 @@ All models share **identical base weights, identical SFT starting checkpoint $\p
 | | **GRPO-FixedCost** | 95.83 | 20.00 | 60.87 | 10.31 | 100.00 |
 | | **GRPO-CapabilityAware (Ours)** | **95.83** (+2.50pp) | **20.00** | **60.87** | **10.31** | **100.00** |
 
+> **Honesty note (controlled null result).** At λ=0.1 all three GRPO variants share an identical tool policy
+> (per-sample audit: zero tool-decision changes vs. SFT; the +Acc gains are shared by all GRPO variants, not
+> specific to Ours). We report this null result explicitly instead of overclaiming; the reward-scale regime
+> where Fixed vs Capability-aware penalties diverge (λ∈{0.3, 0.5}) is analyzed in `report/report.md` §6 and
+> Figure 4. Per-sample records for independent verification: `eval_results/*_records.jsonl`.
+
 ---
 
 ## 📊 Core Research Figures
@@ -45,9 +51,20 @@ Tool call rate stratified by capability groups (Incapable $c \le \frac{1}{3}$ vs
 ![Figure 2: Selective Tool Use](figures/fig2_selective_tool_use.png)
 
 ### Figure 3: Accuracy vs. Efficiency Pareto Frontier
-Capability-aware post-training maintains high accuracy (+2.50pp over SFT on OOD and distribution-shift benchmarks) while avoiding performance collapse:
+GRPO post-training maintains high accuracy (+2.50pp over SFT on OOD and distribution-shift benchmarks — a gain
+shared by all three GRPO variants; at λ=0.1 the three policies coincide, see honesty note above) while avoiding
+performance collapse:
 
 ![Figure 3: Pareto Frontier](figures/fig3_pareto_frontier.png)
+
+### Figure 4: Lambda Sweep — Where Fixed and Capability-Aware Diverge (if anywhere)
+Capability-group TCR and overall accuracy as functions of the penalty scale λ∈{0.1, 0.3, 0.5}
+for GRPO-Fixed vs GRPO-Cap (generated after the sweep runs; see `report/report.md` §6.3):
+
+![Figure 4: Lambda Sweep](figures/fig4_lambda_sweep.png)
+
+**Statistical appendix**: Wilson 95% CIs and McNemar exact tests on per-sample flips —
+`eval_results/stats_appendix.md` (run `python scripts/analyze_stats.py`).
 
 ---
 
