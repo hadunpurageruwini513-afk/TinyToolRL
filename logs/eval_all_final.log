@@ -1,0 +1,176 @@
+
+>>> Running evaluation: SFT on eval (data/eval.jsonl)...
+Loaded 150 items from data/eval.jsonl
+Loading model: checkpoints/sft_merged...
+
+=================================================================
+ Results: checkpoints/sft_merged [With Tools] on data/eval.jsonl
+=================================================================
+Total samples:     150
+Overall Accuracy:  94.00%
+Tool Call Rate:    33.33%
+Format Valid Rate: 100.00%
+-----------------------------------------------------------------
+Category         | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+common_sense     | 50     | 84.00    | 0.00     | 100.00  
+easy_arith       | 50     | 98.00    | 0.00     | 100.00  
+hard_arith       | 50     | 100.00   | 100.00   | 100.00  
+-----------------------------------------------------------------
+Cap Group            | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+Incapable (c<=1/3)   | 45     | 82.22    | 77.78    | 100.00  
+Capable (c>=2/3)     | 105    | 99.05    | 14.29    | 100.00  
+-----------------------------------------------------------------
+c(x) Bucket      | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+c=0.0            | 38     | 81.58    | 81.58    | 100.00  
+c=0.333          | 7      | 85.71    | 57.14    | 100.00  
+c=0.667          | 8      | 87.50    | 25.00    | 100.00  
+c=1.0            | 97     | 100.00   | 13.40    | 100.00  
+=================================================================
+
+Saved 150 detailed records to eval_results\SFT_eval_records.jsonl
+Saved summary to eval_results\SFT_eval_summary.json
+
+
+>>> Running evaluation: SFT on eval_ood (data/eval_ood.jsonl)...
+Loaded 120 items from data/eval_ood.jsonl
+Loading model: checkpoints/sft_merged...
+
+=================================================================
+ Results: checkpoints/sft_merged [With Tools] on data/eval_ood.jsonl
+=================================================================
+Total samples:     120
+Overall Accuracy:  96.67%
+Tool Call Rate:    50.00%
+Format Valid Rate: 100.00%
+-----------------------------------------------------------------
+Category         | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+common_sense     | 30     | 86.67    | 0.00     | 100.00  
+easy_arith       | 30     | 100.00   | 0.00     | 100.00  
+hard_arith       | 60     | 100.00   | 100.00   | 100.00  
+-----------------------------------------------------------------
+Cap Group            | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+Incapable (c<=1/3)   | 48     | 93.75    | 89.58    | 100.00  
+Capable (c>=2/3)     | 72     | 98.61    | 23.61    | 100.00  
+-----------------------------------------------------------------
+c(x) Bucket      | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+c=0.0            | 43     | 95.35    | 93.02    | 100.00  
+c=0.333          | 5      | 80.00    | 60.00    | 100.00  
+c=0.667          | 4      | 100.00   | 50.00    | 100.00  
+c=1.0            | 68     | 98.53    | 22.06    | 100.00  
+=================================================================
+
+Saved 120 detailed records to eval_results\SFT_eval_ood_records.jsonl
+Saved summary to eval_results\SFT_eval_ood_summary.json
+
+
+>>> Running evaluation: SFT on eval_ratio20 (data/eval_ratio20.jsonl)...
+Loaded 120 items from data/eval_ratio20.jsonl
+Loading model: checkpoints/sft_merged...
+
+=================================================================
+ Results: checkpoints/sft_merged [With Tools] on data/eval_ratio20.jsonl
+=================================================================
+Total samples:     120
+Overall Accuracy:  93.33%
+Tool Call Rate:    20.00%
+Format Valid Rate: 100.00%
+-----------------------------------------------------------------
+Category         | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+common_sense     | 36     | 77.78    | 0.00     | 100.00  
+easy_arith       | 60     | 100.00   | 0.00     | 100.00  
+hard_arith       | 24     | 100.00   | 100.00   | 100.00  
+-----------------------------------------------------------------
+Cap Group            | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+Incapable (c<=1/3)   | 23     | 65.22    | 60.87    | 100.00  
+Capable (c>=2/3)     | 97     | 100.00   | 10.31    | 100.00  
+-----------------------------------------------------------------
+c(x) Bucket      | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+c=0.0            | 15     | 66.67    | 66.67    | 100.00  
+c=0.333          | 8      | 62.50    | 50.00    | 100.00  
+c=0.667          | 7      | 100.00   | 57.14    | 100.00  
+c=1.0            | 90     | 100.00   | 6.67     | 100.00  
+=================================================================
+
+Saved 120 detailed records to eval_results\SFT_eval_ratio20_records.jsonl
+Saved summary to eval_results\SFT_eval_ratio20_summary.json
+
+
+>>> Running evaluation: GRPO-Outcome on eval (data/eval.jsonl)...
+Loaded 150 items from data/eval.jsonl
+Loading model: checkpoints/grpo_outcome_run1...
+Loading base model checkpoints/sft_merged with adapter checkpoints/grpo_outcome_run1...
+
+=================================================================
+ Results: checkpoints/grpo_outcome_run1 [With Tools] on data/eval.jsonl
+=================================================================
+Total samples:     150
+Overall Accuracy:  94.67%
+Tool Call Rate:    33.33%
+Format Valid Rate: 100.00%
+-----------------------------------------------------------------
+Category         | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+common_sense     | 50     | 86.00    | 0.00     | 100.00  
+easy_arith       | 50     | 98.00    | 0.00     | 100.00  
+hard_arith       | 50     | 100.00   | 100.00   | 100.00  
+-----------------------------------------------------------------
+Cap Group            | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+Incapable (c<=1/3)   | 45     | 82.22    | 77.78    | 100.00  
+Capable (c>=2/3)     | 105    | 100.00   | 14.29    | 100.00  
+-----------------------------------------------------------------
+c(x) Bucket      | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+c=0.0            | 38     | 81.58    | 81.58    | 100.00  
+c=0.333          | 7      | 85.71    | 57.14    | 100.00  
+c=0.667          | 8      | 100.00   | 25.00    | 100.00  
+c=1.0            | 97     | 100.00   | 13.40    | 100.00  
+=================================================================
+
+Saved 150 detailed records to eval_results\GRPO-Outcome_eval_records.jsonl
+Saved summary to eval_results\GRPO-Outcome_eval_summary.json
+
+
+>>> Running evaluation: GRPO-Outcome on eval_ood (data/eval_ood.jsonl)...
+Loaded 120 items from data/eval_ood.jsonl
+Loading model: checkpoints/grpo_outcome_run1...
+Loading base model checkpoints/sft_merged with adapter checkpoints/grpo_outcome_run1...
+
+=================================================================
+ Results: checkpoints/grpo_outcome_run1 [With Tools] on data/eval_ood.jsonl
+=================================================================
+Total samples:     120
+Overall Accuracy:  99.17%
+Tool Call Rate:    50.00%
+Format Valid Rate: 100.00%
+-----------------------------------------------------------------
+Category         | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+common_sense     | 30     | 96.67    | 0.00     | 100.00  
+easy_arith       | 30     | 100.00   | 0.00     | 100.00  
+hard_arith       | 60     | 100.00   | 100.00   | 100.00  
+-----------------------------------------------------------------
+Cap Group            | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+Incapable (c<=1/3)   | 48     | 100.00   | 89.58    | 100.00  
+Capable (c>=2/3)     | 72     | 98.61    | 23.61    | 100.00  
+-----------------------------------------------------------------
+c(x) Bucket      | Count  | Acc (%)  | TCR (%)  | Fmt (%) 
+-----------------------------------------------------------------
+c=0.0            | 43     | 100.00   | 93.02    | 100.00  
+c=0.333          | 5      | 100.00   | 60.00    | 100.00  
+c=0.667          | 4      | 100.00   | 50.00    | 100.00  
+c=1.0            | 68     | 98.53    | 22.06    | 100.00  
+=================================================================
+
+Saved 120 detailed records to eval_results\GRPO-Outcome_eval_ood_records.jsonl
+Saved summary to eval_results\GRPO-Outcome_eval_ood_summary.json

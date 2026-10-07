@@ -150,7 +150,50 @@ Because the net advantage remains positive, the model does not risk answering di
 - **Small λ (≤ 0.1)**: Acts as a conservative regularizer that improves overall reasoning accuracy while maintaining baseline tool patterns.
 - **Moderate λ (0.2 ~ 0.5)**: Forces the policy into the critical trade-off regime where Capability-Aware RL diverges sharply from FixedCost RL—FixedCost collapses accuracy on hard items, whereas Capability-Aware RL shields hard items (c(x)=0 ⟹ cost=0) while actively pruning redundant calls.
 
-> **Status note (2026-10-07)**: The moderate-λ divergence above was a *hypothesis* at first submission. A λ-sweep (Fixed vs Cap at λ∈{0.3, 0.5}, identical hyperparameters) has since been run; its measured outcome — divergence or continued null result — is reported in §6.3 and the updated Figure 3/4. Whatever the outcome, it is reported as measured.
+> **Status note (2026-10-07)**: The moderate-λ divergence above was a *hypothesis* at first submission. The λ-sweep
+> (Fixed vs Cap at λ∈{0.3, 0.5}, identical hyperparameters, seed 42) has since been run and evaluated; its measured
+> outcome is reported in §6.3. **The hypothesis is refuted by measurement**: no behavioral divergence appears at any
+> tested λ, and the training logs identify why (rollout degeneracy, §6.3). We report this null result as the
+> primary scientific output of the sweep.
+
+### 6.3 Measured λ-Sweep: A Dose-Response Null Result
+
+**Setup.** GRPO-Fixed and GRPO-Cap trained at λ∈{0.1, 0.3, 0.5} (six policies), all from the same π0 start,
+same training data, same hyperparameters, same seed; evaluated greedily on all three splits with per-sample
+records archived (`eval_results/*_records.jsonl`).
+
+| λ | Mode | Acc (eval / ood / ratio20) | TCR (eval / ood / ratio20) | Incapable TCR | Capable TCR |
+|---|---|---|---|---|---|
+| — | SFT (π0) | 94.00 / 96.67 / 93.33 | 33.33 / 50.00 / 20.00 | 77.78 | 14.29 |
+| 0.1 | Fixed | 94.67 / 99.17 / 95.83 | 33.33 / 50.00 / 20.00 | 77.78 | 14.29 |
+| 0.1 | Cap | 94.67 / 99.17 / 95.83 | 33.33 / 50.00 / 20.00 | 77.78 | 14.29 |
+| 0.3 | Fixed | 95.33 / 98.33 / 94.17 | 33.33 / 50.00 / 20.00 | 77.78 | 14.29 |
+| 0.3 | Cap | 95.33 / 99.17 / 95.00 | 33.33 / 50.00 / 20.00 | 77.78 | 14.29 |
+| 0.5 | Fixed | 94.67 / 99.17 / 95.00 | 33.33 / 50.00 / 20.00 | 77.78 | 14.29 |
+| 0.5 | Cap | 94.67 / 99.17 / 95.00 | 33.33 / 50.00 / 20.00 | 77.78 | 14.29 |
+
+**Observation 1 (behavioral null).** Tool Call Rate and capability-group TCR are *bit-identical* across all six
+trained policies and π0, at every λ: the call-or-not decision is completely insensitive to penalty scale and to
+capability conditioning. Accuracy deltas (1–3 sample flips per split) are non-monotonic in λ and inconsistent
+in sign across splits — within sampling noise per the McNemar tests in `eval_results/stats_appendix.md`.
+
+**Observation 2 (the penalty was active and distinct).** Training logs (`logs/grpo_*_log.json`) confirm the two
+reward modes delivered different signals: at λ=0.5 the mean penalty per step was −0.40→−0.28 (Fixed) vs
+−0.175→−0.09 (Cap), i.e. capability conditioning halved the cost actually charged. The signals differed; the
+behavior did not.
+
+**Observation 3 (mechanism: rollout degeneracy).** In all four sweep runs, at every logged step,
+`frac_reward_zero_std = 1.00` and policy entropy ≈ 0.0007–0.0009: all G=4 rollouts of every prompt group receive
+identical reward, so GRPO's group-relative advantage is zero almost everywhere and no reward difference — of any
+scale or conditioning — can produce gradient signal. The binding constraint is the near-determinism of the
+over-fit π0 (SFT eval loss 0.0147), not the reward design.
+
+**Implication.** Reward shaping for tool efficiency — uniform or capability-aware — is inert without exploration:
+rollout temperature/entropy bonuses, a less over-fit π0, or contrastive (label–capability-disagreement) training
+data are the levers that must move first. Capability-awareness remains the correct inductive bias for *cost
+attribution* (Observation 2), but its behavioral effect is gated by policy stochasticity. H2/H3 are therefore
+**not confirmed** at the tested scales; §6.1's predicted divergence is refuted, and we record the refutation with
+its mechanism as the sweep's contribution.
 
 ### 6.2 Efficiency and Carbon Footprint
 By executing our complete experimental matrix on a consumer-grade laptop GPU (RTX 4060, 8GB VRAM), we prove that rigorous agentic RL research does not require multi-node clusters. The entire training and evaluation workflow executes in under 90 minutes.

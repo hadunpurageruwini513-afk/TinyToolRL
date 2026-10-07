@@ -57,9 +57,11 @@ performance collapse:
 
 ![Figure 3: Pareto Frontier](figures/fig3_pareto_frontier.png)
 
-### Figure 4: Lambda Sweep — Where Fixed and Capability-Aware Diverge (if anywhere)
-Capability-group TCR and overall accuracy as functions of the penalty scale λ∈{0.1, 0.3, 0.5}
-for GRPO-Fixed vs GRPO-Cap (generated after the sweep runs; see `report/report.md` §6.3):
+### Figure 4: Lambda Sweep — the Measured Dose-Response Null Result
+Capability-group TCR and overall accuracy as functions of the penalty scale λ∈{0.1, 0.3, 0.5} for GRPO-Fixed vs
+GRPO-Cap: **the curves are flat and coincident** — neither penalty scale nor capability conditioning moves the
+call-or-not policy. Training logs identify the mechanism (rollout degeneracy of the over-fit π0;
+`frac_reward_zero_std = 1.0` at every logged step). See `report/report.md` §6.3:
 
 ![Figure 4: Lambda Sweep](figures/fig4_lambda_sweep.png)
 

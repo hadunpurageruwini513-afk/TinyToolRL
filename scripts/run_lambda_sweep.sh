@@ -17,10 +17,16 @@ free_mb() {
 
 run_one() {
   reward="$1"; lam="$2"; tag="$3"
+  mode="$reward"
+  ckpt="checkpoints/grpo_${mode}_${tag}/adapter_model.safetensors"
+  if [ -f "$ckpt" ]; then
+    echo "=== SKIP reward=$reward lam=$lam tag=$tag (checkpoint complete) ==="
+    return 0
+  fi
   local f=0 i
   for i in $(seq 1 60); do
     f="$(free_mb)"
-    [ "${f:-0}" -ge 3000 ] && break
+    [ "${f:-0}" -ge 2500 ] && break
     sleep 30
   done
   echo "=== START reward=$reward lam=$lam tag=$tag free=${f}MB at $(date +%H:%M:%S) ==="

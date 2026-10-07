@@ -1,0 +1,33 @@
+Exception in thread Thread-2 (_readerthread):
+Traceback (most recent call last):
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xa8 in position 145: invalid start byte
+Exception in thread Thread-4 (_readerthread):
+Traceback (most recent call last):
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xa8 in position 145: invalid start byte
+Exception in thread Thread-6 (_readerthread):
+Traceback (most recent call last):
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\threading.py", line 1075, in _bootstrap_inner
+    self.run()
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\threading.py", line 1012, in run
+    self._target(*self._args, **self._kwargs)
+  File "D:\Users\27682\anaconda3\envs\tinytoolrl\Lib\subprocess.py", line 1599, in _readerthread
+    buffer.append(fh.read())
+                  ^^^^^^^^^
+  File "<frozen codecs>", line 322, in decode
+UnicodeDecodeError: 'utf-8' codec can't decode byte 0xa8 in position 80: invalid start byte

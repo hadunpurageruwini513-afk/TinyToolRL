@@ -1,0 +1,13 @@
+=== SKIP reward=fixed lam=0.3 tag=lam03 (checkpoint complete) ===
+=== SKIP reward=cap lam=0.3 tag=lam03 (checkpoint complete) ===
+=== START reward=fixed lam=0.5 tag=lam05 free=7776MB at 08:13:44 ===
+Saving trained GRPO adapter to checkpoints/grpo_fixed_lam05...
+Training and checkpoint save complete!
+
+=== END reward=fixed lam=0.5 tag=lam05 at 08:30:47 ===
+=== START reward=cap lam=0.5 tag=lam05 free=7331MB at 08:30:48 ===
+Saving trained GRPO adapter to checkpoints/grpo_cap_lam05...
+Training and checkpoint save complete!
+
+=== END reward=cap lam=0.5 tag=lam05 at 08:47:57 ===
+=== SWEEP ALL DONE at 08:47:57 ===

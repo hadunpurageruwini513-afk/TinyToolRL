@@ -43,6 +43,7 @@ def run_eval(model_name: str, model_path: str, split_name: str, split_path: str,
 
     cmd = [
         sys.executable,
+        "-X", "utf8",
         "eval/evaluate.py",
         "--model", model_path,
         "--data", split_path,
@@ -51,7 +52,7 @@ def run_eval(model_name: str, model_path: str, split_name: str, split_path: str,
         "--summary-output", summary_path,
     ]
     print(f"\n>>> Running evaluation: {model_name} on {split_name} ({split_path})...")
-    res = subprocess.run(cmd, capture_output=True, text=True)
+    res = subprocess.run(cmd, capture_output=True, text=True, encoding="utf-8", errors="replace")
     if res.returncode != 0:
         print(f"Error evaluating {model_name} on {split_name}:")
         print(res.stderr)

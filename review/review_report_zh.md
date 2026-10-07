@@ -99,7 +99,7 @@
 | P0-1 | Abstract/README 把共享收益归功于 Ours | ✔ | report Abstract、README 主表下 honesty note、§5.2 新增 takeaway 4（零结果显式报告） |
 | P0-2 | "checkpoints released openly" 为假；MIT 无 LICENSE | ✔ | 声明改为"代码/数据/逐样本记录/复现脚本开源，adapter 可由脚本复现"；补 `LICENSE` |
 | P0-3 | CLAUDE.md 待办 I 误记 [x]；base/SFT 数字自相矛盾 | ✔ | 待办 I 改回 [ ] 并注明真实状态；C②/D④ 数字统一为入库 JSON 口径 |
-| P1-4 | λ 分化实验缺失（§6.1 推测无证据） | ◐ | `scripts/run_lambda_sweep.sh`：Fixed/Cap × λ∈{0.3,0.5} 四组同超参重训（带内存守卫串行）；结果入 §6.3 与 Fig4，分化与否均如实报告 |
+| P1-4 | λ 分化实验缺失（§6.1 推测无证据） | ✔ | 四组 λ 扫描（Fixed/Cap × 0.3/0.5）已训完并全量评测；**实测为剂量-反应零结果**：TCR/分组 TCR 六策略逐位相同，Acc 差异 1-3 题翻转且不单调；训练日志给出机制（frac_reward_zero_std≡1.0、entropy≈0.001 → 过拟合 π0 的 rollout 退化使 GRPO 优势恒零）。report §6.3 与 Fig4 如实报告，§6.1 推测标注为被实测证伪 |
 | P1-5 | needs_tool 与 c(x) 共线导致 Fixed≡Cap 结构性无功效 | ✖ 保留 | 重造数据+重训 SFT 全链路超出本次修订算力预算；已写入 report §7 Limitations 与 future work，并给出具体补救设计（标签-能力分歧样本、中间难度桶 ≥25%） |
 | P1-6 | 无 CI/显著性/种子 | ◐ | `scripts/analyze_stats.py` → `eval_results/stats_appendix.md`（Wilson CI + McNemar 精确检验）；report §5 新增不确定性段；多种子列入后续 |
 | P1-7 | 无训练曲线留档 | ✔ | `train_grpo.py` 训练后写 `logs/grpo_{mode}_lam{λ}_{tag}_log.json`（per-step 各 reward 均值/组统计），λ 扫描起生效 |
